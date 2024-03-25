@@ -6,9 +6,7 @@ const recommendationsapi = "/recommendations/";
 
 // Api Server Manager
 
-const AvailableServers = [
-    "https://api69.anime-dex.workers.dev",
-];
+const AvailableServers = ["https://api69.anime-dex.workers.dev"];
 
 function getApiServer() {
     return AvailableServers[Math.floor(Math.random() * AvailableServers.length)];
@@ -31,9 +29,9 @@ async function getJson(path, errCount = 0) {
     }
 
     try {
-        const _url_of_site = new URL(window.location.href)
-        const referer = _url_of_site.hostname
-        const response = await fetch(url, { headers: { 'referer': referer } });
+        const _url_of_site = new URL(window.location.href);
+        const referer = _url_of_site.origin;
+        const response = await fetch(url, { headers: { referer: referer } });
         return await response.json();
     } catch (errors) {
         console.error(errors);
@@ -155,17 +153,8 @@ async function loadAnimeFromAnilist(data) {
     for (i = 0; i < recommendations.length; i++) {
         let anime = recommendations[i];
         let title = anime["title"]["userPreferred"];
-        
-        
-        
-        
         rechtml += `<a href="./anime.html?anime_id=${title}"><div class="poster la-anime"> <div id="shadow1" class="shadow"> <div class="dubb">${anime["meanScore"]} / 100</div><div class="dubb dubb2">${anime["format"]}</div></div><div id="shadow2" class="shadow"> <img class="lzy_img" src="./static/loading1.gif" data-src="${anime["coverImage"]["large"]}"> </div><div class="la-details"> <h3>${title}</h3> <div id="extra"> <span>${anime["status"]}</span> <span class="dot"></span> <span>EP ${anime["episodes"]}</span> </div></div></div></a>`;
     }
-    
-    document.documentElement.innerHTML =
-        document.documentElement.innerHTML.replaceAll("TITLE", title);
-        
-        
     document.getElementById("latest2").innerHTML = rechtml;
 
     document.getElementById("ephtmldiv").innerHTML =
@@ -305,8 +294,6 @@ async function getRecommendations(anime_title) {
         let title = anime["title"]["userPreferred"];
         rechtml += `<a href="./anime.html?anime_id=${title}"><div class="poster la-anime"> <div id="shadow1" class="shadow"> <div class="dubb">${anime["meanScore"]} / 100</div><div class="dubb dubb2">${anime["format"]}</div></div><div id="shadow2" class="shadow"> <img class="lzy_img" src="./static/loading1.gif" data-src="${anime["coverImage"]["large"]}"> </div><div class="la-details"> <h3>${title}</h3> <div id="extra"> <span>${anime["status"]}</span> <span class="dot"></span> <span>EP ${anime["episodes"]}</span> </div></div></div></a>`;
     }
-    document.documentElement.innerHTML =
-        document.documentElement.innerHTML.replaceAll("TITLE", title);
     document.getElementById("latest2").innerHTML = rechtml;
     document.getElementsByClassName("sload")[0].style.display = "none";
     console.log("Anime Recommendations loaded");
@@ -319,8 +306,7 @@ const windowWidth = window.innerWidth;
 function plusSlides(n) {
     if (n === 1) {
         document.getElementById("slider-carousel").scrollLeft += windowWidth / 2;
-    }
-    else if (n === -1) {
+    } else if (n === -1) {
         document.getElementById("slider-carousel").scrollLeft -= windowWidth / 2;
     }
 }
