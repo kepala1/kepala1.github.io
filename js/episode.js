@@ -60,6 +60,15 @@ async function loadVideo(name, stream) {
         const serversbtn = document.getElementById("serversbtn");
 
         let url = stream["sources"][0]["file"];
+
+
+        var domainName = window.location.hostname;
+
+        
+        let fullUrl = `<iframe src="https://${domainName}/embed.html?url=${url}&episode_id=${EpisodeID}" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>`;
+document.getElementById("embed-url").value = fullUrl;
+
+        
         serversbtn.innerHTML += `<div class="sitem"> <a class="sobtn sactive" onclick="selectServer(this)" data-value="./embed.html?url=${url}&episode_id=${EpisodeID}">AD Free 1</a> </div>`;
         document.getElementsByClassName("sactive")[0].click();
 
