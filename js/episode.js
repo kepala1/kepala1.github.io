@@ -8,7 +8,7 @@ const dlapi = "/download/";
 // Api Server Manager
 
 const AvailableServers = [
-    "https://api69.anime-dex.workers.dev'",
+    "https://api69.anime-dex.workers.dev",
 ];
 
 function getApiServer() {
